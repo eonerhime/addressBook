@@ -82,9 +82,8 @@ function CreateContactForm( {contactToUpdate = {}, onCloseModal }) {
     setShowMoreDetails((showMore) => !showMore);
   }
 
-  function handleNumberChange(value, country, e){
-    console.log(value, country, e);
-    console.log(e.target.name);
+  function handleNumberChange(number){
+    console.log(number);
   }
 
   const customStyle = ['grid', 'none'];
@@ -165,7 +164,7 @@ function CreateContactForm( {contactToUpdate = {}, onCloseModal }) {
             name="phoneInput"
             defaultCountry="ng"
             disabled={isWorking}
-            onChange={handleNumberChange} 
+            onChange={ (e, name, i) =>handleNumberChange(e?.target?.value, name, i)} 
             {...register("phone", {
               required: "This field is required",
             })}/>
@@ -271,6 +270,7 @@ function CreateContactForm( {contactToUpdate = {}, onCloseModal }) {
 
         <FormRow style={{width: 'auto'}}>
           <Button 
+            disabled={isWorking} 
             $variation="secondary" 
             type="reset" onClick={()=>onCloseModal?.()}>
             Cancel

@@ -1,8 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import fetchContacts from "../../services/apiContacts";
 import { useSearchParams } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+
+import { PAGE_SIZE } from "../../utils/constants";
+import fetchContacts from "../../services/apiContacts";
 
 export function useContacts(){
+  const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
   
   // Filter
@@ -18,6 +21,7 @@ export function useContacts(){
   // Pagination
   const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'))
 
+  // Query
   const {
     isLoading,
     data: {data: contacts, count} = {},
@@ -25,6 +29,23 @@ export function useContacts(){
     queryKey: ['contacts', sortBy, page],
     queryFn: () => fetchContacts({sortBy, page}),
   });
+
+  // Prefetching
+  const pageCount = Math.ceil(count / PAGE_SIZE);
+
+  // Next page
+  if (page < pageCount)
+  queryClient.prefetchQuery({
+    queryKey: ['contacts', sortBy, page + 1],
+    queryFn: () => fetchContacts({sortBy, page: page + 1}),
+  })
+
+  // Previous page
+  if (page > 1)
+  queryClient.prefetchQuery({
+    queryKey: ['contacts', sortBy, page - 1],
+    queryFn: () => fetchContacts({sortBy, page: page - 1}),
+  })
 
   return { isLoading, contacts, count };
 }
