@@ -4,12 +4,15 @@ import Table from "../../ui/Table";
 import Modal from "../../ui/Modal";
 import { PAGE_SIZE } from "../../utils/constants";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import CreateContactForm from "./CreateContactForm";
 import { useDeleteContact } from "./useDeleteContact";
 import Menus from "../../ui/Menus";
-import { HiPencil, HiTrash } from "react-icons/hi2";
+import { HiFolderOpen, HiPencil, HiTrash } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import EditContact from "./EditContactView";
+// import { HiGlobe } from "react-icons/hi";
+import CreateContactForm from "./CreateContactForm";
+import EditContactView from "./EditContactView";
 
 const Img = styled.img`
   width: 4.8rem;
@@ -46,8 +49,8 @@ function ContactsRow({contact, index} ) {
   
   const { isSuccess, deleteContact } = useDeleteContact();
   const [sn, setSn] = useState(1);
-  
-  const curPage = Number(searchParams.get('page'));
+ 
+  const curPage = !searchParams.get('page') ? 1 : Number(searchParams.get('page'))
 
   useEffect(function(){
     if (curPage === 1) setSn(() => index + 1)
@@ -62,23 +65,23 @@ function ContactsRow({contact, index} ) {
       <div>{sn}.</div>
 
       <Modal>
-        <Modal.Open opens="contact-form">
+        <Modal.Open opens="view-contact">
           <Name className="justify-start">
             <Img src={image} alt={firstName} className="hidden min-[300px]:block"/>
               {firstName} {lastName}
           </Name>
         </Modal.Open>
         
-        <Modal.Open opens="contact-form">
+        <Modal.Open opens="view-contact">
           <Phone className="hidden min-[400px]:grid">{phone}</Phone>
         </Modal.Open>
 
-        <Modal.Open opens="contact-form">
+        <Modal.Open opens="view-contact">
           <Email className="hidden min-[680px]:block">{email}</Email>
         </Modal.Open>
 
-        <Modal.Window name="contact-form">
-          <CreateContactForm  contactToUpdate={contact}/>
+        <Modal.Window name="view-contact">
+          <EditContact  contactToUpdate={contact}/>
         </Modal.Window>
       </Modal>
 
@@ -88,6 +91,10 @@ function ContactsRow({contact, index} ) {
             <Menus.Toggle id={contactId} />
 
             <Menus.List id={contactId}>
+              <Modal.Open opens="view-contact">
+                <Menus.Button icon={<HiFolderOpen />}>View</Menus.Button>
+              </Modal.Open>
+
               <Modal.Open opens="contact-form">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>
@@ -96,6 +103,10 @@ function ContactsRow({contact, index} ) {
                 <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
               </Modal.Open>
             </Menus.List>
+
+            <Modal.Window name="view-contact">
+              <EditContactView contactToUpdate={contact}/>
+            </Modal.Window>
 
             <Modal.Window name="contact-form">
               <CreateContactForm contactToUpdate={contact}/>
@@ -107,6 +118,7 @@ function ContactsRow({contact, index} ) {
           </Menus.Menu>
         </Modal>
       </div>
+
     </Table.Row>
   )
 }

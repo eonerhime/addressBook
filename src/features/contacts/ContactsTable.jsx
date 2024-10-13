@@ -5,8 +5,8 @@ import { useContacts } from "./useContacts";
 import Menus from "../../ui/Menus";
 import useScreenSize from "../../hooks/useScreenSize";
 import { useEffect, useState } from "react";
-// import { useSearchParams } from "react-router-dom";
 import Pagination from "../../ui/Pagination";
+// import { useSearchParams } from "react-router-dom";
 
 const displaySize =  {
   large: '5% 30% 15% 30% 5%', /* >=680px */
@@ -16,12 +16,9 @@ const displaySize =  {
 
 function ContactsTable() {  
   const deviceScreen = useScreenSize();
-  // const [ searchParama ] = useSearchParams();
-  const { isLoading, contacts, count } = useContacts();
   const [ screenSize, setScreenSize ] = useState("");
+  const { isLoading, contacts, count } = useContacts();
   const [ getScreenSize, setGetScreenSize ] = useState('');
-
-  // console.log(contacts);
   
   useEffect(function(){
     setScreenSize(deviceScreen);

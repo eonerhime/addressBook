@@ -65,14 +65,15 @@ const variations = {
   `,
  
   edit: css`
-    border-width: 1px;
-    padding-left: 1rem /* 16px */;
-    padding-right: 1rem /* 16px */;
-    padding-top: 0.25rem /* 4px */;
-    border-radius: 0.5rem /* 8px */;
-    padding-bottom: 0.25rem /* 4px */;
+    /* border-width: 1px; */
+    /* padding-left: 1rem 16px; */
+    /* padding-right: 1rem 16px; */
+    /* padding-top: 0.25rem 4px; */
+    /* border-radius: 0.5rem 8px; */
+    /* padding-bottom: 0.25rem 4px; */
     color: #f1f5f9;
     background-color: #15803d;
+    
     &:hover {
       background-color:  #4ade80 
     };

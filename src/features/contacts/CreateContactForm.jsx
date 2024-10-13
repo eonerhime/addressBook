@@ -20,6 +20,7 @@ const gridSizes =  {
 }
 
 function CreateContactForm( {contactToUpdate = {}, onCloseModal }) {
+  
   const deviceScreen = useScreenSize();
   const [phone, setPhone] = useState('');
   const [ screenSize, setScreenSize ] = useState("");
@@ -78,10 +79,11 @@ function CreateContactForm( {contactToUpdate = {}, onCloseModal }) {
     // console.log(errors);
   }
 
-  function handleShowMoreDetails(){
+  function handleShowMoreDetails(e){
+    console.log(e.target);
     setShowMoreDetails((showMore) => !showMore);
   }
-
+  
   function handleNumberChange(number){
     console.log(number);
   }
