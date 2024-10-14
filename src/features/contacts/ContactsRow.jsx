@@ -9,8 +9,6 @@ import Menus from "../../ui/Menus";
 import { HiFolderOpen, HiPencil, HiTrash } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import EditContact from "./EditContactView";
-// import { HiGlobe } from "react-icons/hi";
 import CreateContactForm from "./CreateContactForm";
 import EditContactView from "./EditContactView";
 
@@ -81,7 +79,7 @@ function ContactsRow({contact, index} ) {
         </Modal.Open>
 
         <Modal.Window name="view-contact">
-          <EditContact  contactToUpdate={contact}/>
+          <EditContactView  contactToUpdate={contact}/>
         </Modal.Window>
       </Modal>
 

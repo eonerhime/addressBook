@@ -38,28 +38,28 @@ function EditContactView( {contactToUpdate = {}, onCloseModal }) {
 
   return (
     <div>
-        <FormRow label="Contact Photo" customStyle={customStyle.at(0)} gridCols={numberColumns}>
-          <img src={contactDetails.image} alt={contactDetails.image} className="max-w-36 h-auto rounded-[50%]"/>
-        </FormRow>
+      <FormRow label="Contact Photo" customStyle={customStyle.at(0)} gridCols={numberColumns}>
+        <img src={contactDetails.image} alt={contactDetails.image} className="max-w-36 h-auto rounded-[50%]"/>
+      </FormRow>
 
-        <FormRow label="Title"  customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
+      <FormRow label="Title"  customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
           <Label
             type="text" 
             id="title">{contactDetails.title}</Label>
         </FormRow>
 
-        <FormRow label="First Name" customStyle={customStyle.at(0)} gridCols={numberColumns}>
+      <FormRow label="First Name" customStyle={customStyle.at(0)} gridCols={numberColumns}>
           <Label 
             type="text" 
             id="firstName"
           >{contactDetails.firstName}</Label>
-        </FormRow>
+      </FormRow>
 
-        <FormRow label="Middle Name" customStyle ={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
+      <FormRow label="Middle Name" customStyle ={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
           <Label 
             type="text" 
             id="middleName">{contactDetails.middleName}</Label>
-        </FormRow>
+      </FormRow>
 
         <FormRow label="Last Name" customStyle={customStyle.at(0)} gridCols={numberColumns}>
           <Label 
@@ -119,37 +119,37 @@ function EditContactView( {contactToUpdate = {}, onCloseModal }) {
             type="text">{contactDetails.tiktok}</Label>
         </FormRow>
 
-        <FormRow label="LinkedIn Handle" customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
+      <FormRow label="LinkedIn Handle" customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
           <Label 
             type="text" 
             id="linkedIn">{contactDetails.linkedin}</Label>
-        </FormRow>
+      </FormRow>
 
-        <FormRow label="Pinterest Handle" customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
+      <FormRow label="Pinterest Handle" customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
           <Label 
             type="text" 
             id="pinterest">{contactDetails.pinterest}</Label>
-        </FormRow>
+      </FormRow>
 
-        <FormRow label="Youtube Handle" customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
+      <FormRow label="Youtube Handle" customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
           <Label 
             type="text" 
             id="youtube">{contactDetails.youtube}</Label>
-        </FormRow>
+      </FormRow>
 
-        <FormRow label="Snapchat Handle" customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
+      <FormRow label="Snapchat Handle" customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
           <Label 
             type="text" 
             id="snapchat">{contactDetails.snapchat}</Label>
-        </FormRow>
+      </FormRow>
 
-        <FormRow>
-          <div className="flex flex-row items-center gap-4 cursor-pointer" onClick={handleShowMoreDetails}>
-            <span>{showMoreDetails ? 'Show Less' : 'Show More'}</span>
+      <FormRow>
+        <div className="flex flex-row items-center gap-4 cursor-pointer" onClick={handleShowMoreDetails}>
+          <span>{showMoreDetails ? 'Show Less' : 'Show More'}</span>
             {showMoreDetails ? 
-            <MdOutlineExpandLess className="h-8 w-8" /> : <MdOutlineExpandMore className="h-8 w-8"/>}
-          </div>
-        </FormRow>
+          <MdOutlineExpandLess className="h-8 w-8" /> : <MdOutlineExpandMore className="h-8 w-8"/>}
+        </div>
+      </FormRow>
 
         <FormRow style={{width: 'auto'}}>
           <Button 
@@ -158,17 +158,17 @@ function EditContactView( {contactToUpdate = {}, onCloseModal }) {
             Cancel
           </Button>
           
-          <Modal>
-            <Modal.Open opens="contact-form">
-              <Button option='edit'>Edit Contact</Button>
-            </Modal.Open>
-            
-            <Modal.Window name="contact-form">
-              <CreateContactForm contactToUpdate={contactDetails}/>
-            </Modal.Window>
-          </Modal>
+        <Modal>
+          <Modal.Open opens="contact-form">
+            <Button onClick={(e)=> e.preventDefault()} option='edit'>Edit Contact</Button>
+          </Modal.Open>
+              
+          <Modal.Window name="contact-form">
+            <CreateContactForm contactToUpdate={contactDetails}/>
+          </Modal.Window>
+        </Modal>
 
-        </FormRow> 
+      </FormRow> 
     </div>
   );
 }
