@@ -1,10 +1,32 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledFormRow = styled.div`
-  gap: 1.2rem;
+  display: grid;
   align-items: center;
+  ${(props) =>
+    props.type === "login" &&
+    css`
+      gap: 1rem;
+      grid-template-columns: 1fr;
+      /* grid-template-rows: 1fr 1.2fr; */
+    `}
 
-  padding: 1.2rem 0;
+  ${(props) =>
+    props.type !== "login" &&
+    css`
+      gap: 2.4rem;
+      grid-template-columns: 24rem 1fr 1.2fr;
+    `}
+
+  /* ${(props) =>
+    props.type === "signup" &&
+    css`
+      gap: 2.4rem;
+      max-width: 100%;
+      grid-template-columns: 1fr 1fr;
+    `} */
+
+   padding: 1.2rem 0;
 
   &:first-child {
     padding-top: 0;
@@ -20,14 +42,27 @@ const StyledFormRow = styled.div`
 
   &:has(button) {
     display: flex;
-    justify-content: space-evenly;
-    gap: 1.2rem;
+
+    ${(props) =>
+      props.btntype !== "formBtn" &&
+      css`
+        justify-content: flex-end;
+        gap: 1.2rem;
+      `}
+
+    ${(props) =>
+      props.btntype === "formBtn" &&
+      css`
+        /* display: block !important; */
+        display: flex;
+        max-width: 100%;
+        justify-content: flex-start;
+      `}
   }
 `;
 
 const Label = styled.label`
-  font-weight: 600;
-  width: fit-content;
+  font-weight: 500;
 `;
 
 const Error = styled.span`
@@ -35,10 +70,9 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function FormRow({ customStyle, label, error, children, gridCols }) {
-
+function FormRow({ label, error, type, btntype, children }) {
   return (
-    <StyledFormRow style={{display: customStyle, gridTemplateColumns: gridCols }}>
+    <StyledFormRow type={type} btntype={btntype}>
       {label && <Label htmlFor={children.props.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}

@@ -8,7 +8,7 @@ import { useDeleteContact } from "./useDeleteContact";
 import Menus from "../../ui/Menus";
 import { HiFolderOpen, HiPencil, HiTrash } from "react-icons/hi2";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import CreateContactForm from "./CreateContactForm";
 import EditContactView from "./EditContactView";
 
@@ -44,6 +44,8 @@ const Phone = styled.div`
 
 function ContactsRow({contact, index} ) {
   const [searchParams] =useSearchParams();
+  const navigate = useNavigate();
+  console.log(navigate);
   
   const { isSuccess, deleteContact } = useDeleteContact();
   const [sn, setSn] = useState(1);

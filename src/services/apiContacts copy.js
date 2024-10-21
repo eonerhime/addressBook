@@ -1,4 +1,4 @@
-import supabase, { supabaseUrl } from "./supabas";
+import supabase, { supabaseUrl } from "./supabase";
 
 export default async function fetchContacts ({ filter, sortBy} ) {
  

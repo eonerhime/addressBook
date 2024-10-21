@@ -151,16 +151,16 @@ function EditContactView( {contactToUpdate = {}, onCloseModal }) {
         </div>
       </FormRow>
 
-        <FormRow style={{width: 'auto'}}>
-          <Button 
-            $variation="secondary" 
-            type="reset" onClick={()=>onCloseModal?.()}>
-            Cancel
-          </Button>
+      <FormRow style={{width: 'auto'}}>
+        <Button 
+          $variation="secondary" 
+          type="reset" onClick={()=>onCloseModal?.()}>
+          Cancel
+        </Button>
           
         <Modal>
           <Modal.Open opens="contact-form">
-            <Button onClick={(e)=> e.preventDefault()} option='edit'>Edit Contact</Button>
+            <Button option='edit'>Edit Contact</Button>
           </Modal.Open>
               
           <Modal.Window name="contact-form">

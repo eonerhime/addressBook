@@ -3,14 +3,15 @@ import { IoPerson } from "react-icons/io5";
 import { IoMdMenu, IoMdSettings, IoIosHelpCircleOutline } from "react-icons/io";
 
 import {} from "react-icons/io";
+import Logout from "../features/authentication/Logout";
 
 function Header() {
   return (
     <nav className="col-span-2 flex items-center justify-between px-6 h-24 py-4 border border-b-slate-500 md:col-span-full">
       <div className="flex gap-10 items-center">
-        {/* <span className="bg-gray-300 text-4xl rounded-full px-1 py-1">
-          <IoMdMenu />
-        </span> */}
+        <span className="bg-gray-300 text-4xl rounded-full px-1 py-1">
+          <IoMdMenu className="cursor-pointer"/>
+        </span>
         <span className="hidden min-[460px]:block text-4xl  px-1 py-1">
           <IoPerson />
         </span>
@@ -32,6 +33,9 @@ function Header() {
         </span>
         <span className=" text-4xl  px-1 py-1">
           <IoMdSettings />
+        </span>
+        <span>
+          <Logout />
         </span>
       </div>
     </nav>

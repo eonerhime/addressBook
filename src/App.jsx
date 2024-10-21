@@ -7,6 +7,9 @@ import AppLayout from "./ui/AppLayout";
 import Contacts from "./pages/Contacts";
 import Search from "./pages/Search";
 import GlobalStyles from './styles/GlobalStyles';
+import Login from "./pages/Login";
+import ProtectedRoute from "./ui/ProtectedRoute";
+import Users from './pages/Users'
 // import EditContact from "./features/contacts/EditContact";
 // import CreateContactForm from "./features/contacts/CreateContactForm";
 
@@ -23,13 +26,19 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false}/>
       <GlobalStyles />
-      <BrowserRouter>
+      <BrowserRouter> 
         <Routes>
-          <Route element={<AppLayout />}>
+          <Route element={
+            <ProtectedRoute>
+              <AppLayout />
+              </ProtectedRoute>}
+          >
             <Route index element={<Navigate replace to="contacts" />} />
             <Route path="contacts" element={<Contacts />} />
             <Route path="search" element={<Search />} />
+            <Route path="users" element={<Users />} />
           </Route>
+          <Route path="login" element={<Login />} />
         </Routes>
       </BrowserRouter>
       <Toaster
