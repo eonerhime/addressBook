@@ -20,7 +20,6 @@ function SignupForm() {
         onSettled: () => reset(),
       }
     );
-    console.log(isLoading);
   }
 
   return (

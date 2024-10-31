@@ -8,7 +8,7 @@ function Contacts() {
 
    return (
     <>
-      <Row type='horizontal' className="text-2xl" >
+      <Row type='horizontal' className="flex max-[400px]:flex-col max-[400px]:!items-start text-2xl" >
         <Heading as="h1">Saved Contacts</Heading>
         <ContactTableOperations />
       </Row>
