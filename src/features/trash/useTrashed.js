@@ -2,9 +2,9 @@ import { useSearchParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { PAGE_SIZE } from "../../utils/constants";
-import fetchContacts from "../../services/apiContacts";
+import { fetchTrashedContacts } from "../../services/apiContacts";
 
-export function useContacts() {
+export function useTrashed() {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
@@ -17,9 +17,9 @@ export function useContacts() {
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
   // Query
-  const { isLoading, data: { data: contacts, count } = {} } = useQuery({
-    queryKey: ["contacts", sortBy, page],
-    queryFn: () => fetchContacts({ sortBy, page }),
+  const { isLoading, data: { data: trashedContacts, count } = {} } = useQuery({
+    queryKey: ["trash", sortBy, page],
+    queryFn: () => fetchTrashedContacts({ sortBy, page }),
   });
 
   // Prefetching
@@ -28,16 +28,16 @@ export function useContacts() {
   // Next page
   if (page < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ["contacts", sortBy, page + 1],
-      queryFn: () => fetchContacts({ sortBy, page: page + 1 }),
+      queryKey: ["trash", sortBy, page + 1],
+      queryFn: () => fetchTrashedContacts({ sortBy, page: page + 1 }),
     });
 
   // Previous page
   if (page > 1)
     queryClient.prefetchQuery({
-      queryKey: ["contacts", sortBy, page - 1],
-      queryFn: () => fetchContacts({ sortBy, page: page - 1 }),
+      queryKey: ["trash", sortBy, page - 1],
+      queryFn: () => fetchTrashedContacts({ sortBy, page: page - 1 }),
     });
 
-  return { isLoading, contacts, count };
+  return { isLoading, trashedContacts, count };
 }

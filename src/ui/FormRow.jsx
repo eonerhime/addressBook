@@ -1,14 +1,15 @@
 import styled, { css } from "styled-components";
 
 const StyledFormRow = styled.div`
-  display: grid;
+  display: ${props => props.customStyle};
+  /* display: grid; */
   align-items: center;
+
   ${(props) =>
     props.type === "login" &&
     css`
       gap: 1rem;
       grid-template-columns: 1fr;
-      /* grid-template-rows: 1fr 1.2fr; */
     `}
 
   ${(props) =>
@@ -18,15 +19,7 @@ const StyledFormRow = styled.div`
       grid-template-columns: 24rem 1fr 1.2fr;
     `}
 
-  /* ${(props) =>
-    props.type === "signup" &&
-    css`
-      gap: 2.4rem;
-      max-width: 100%;
-      grid-template-columns: 1fr 1fr;
-    `} */
-
-   padding: 1.2rem 0;
+    padding: 1.2rem 0;
 
   &:first-child {
     padding-top: 0;
@@ -44,7 +37,7 @@ const StyledFormRow = styled.div`
     display: flex;
 
     ${(props) =>
-      props.btntype !== "formBtn" &&
+      props.btntype !== undefined &&
       css`
         justify-content: flex-end;
         gap: 1.2rem;
@@ -53,11 +46,24 @@ const StyledFormRow = styled.div`
     ${(props) =>
       props.btntype === "formBtn" &&
       css`
-        /* display: block !important; */
         display: flex;
         max-width: 100%;
         justify-content: flex-start;
-      `}
+      `
+    }
+
+    ${(props) =>
+      props.btntype === "phone" &&
+      css`
+          gap: 2.4rem;
+          display: grid;
+          /* max-width: 20rem; */
+          padding: 1.2rem 0;
+          align-items: center;
+          grid-template-columns: 24rem 1fr 1.2fr;
+        /* justify-content: flex-start; */
+      `
+    }
   }
 `;
 
@@ -70,9 +76,10 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function FormRow({ label, error, type, btntype, children }) {
+function FormRow({ label, error, type, btntype, customStyle,children }) {
+
   return (
-    <StyledFormRow type={type} btntype={btntype}>
+    <StyledFormRow type={type} btntype={btntype} customStyle={customStyle}>
       {label && <Label htmlFor={children.props.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}

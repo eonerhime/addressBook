@@ -6,45 +6,45 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
 import Contacts from "./pages/Contacts";
 import Search from "./pages/Search";
-import GlobalStyles from './styles/GlobalStyles';
+import GlobalStyles from "./styles/GlobalStyles";
 import Login from "./pages/Login";
 import ProtectedRoute from "./ui/ProtectedRoute";
-import Users from './pages/Users'
+import Users from "./pages/Users";
 import Account from "./pages/Account";
 import Labels from "./pages/Labels";
-import Trash from "./pages/Trash";
+import Trashed from "./pages/Trash";
 import Settings from "./pages/Settings";
 import { DarkModeProvider } from "./context/DarkModeContext";
-// import EditContact from "./features/contacts/EditContact";
-// import CreateContactForm from "./features/contacts/CreateContactForm";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60 * 1000,
-    }
-  }
-})
+    },
+  },
+});
 
 function App() {
   return (
-    <DarkModeProvider> 
+    <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false}/>
+        <ReactQueryDevtools initialIsOpen={false} />
         <GlobalStyles />
-        <BrowserRouter> 
+        <BrowserRouter>
           <Routes>
-            <Route element={
-              <ProtectedRoute>
-                <AppLayout />
-                </ProtectedRoute>}
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
             >
               <Route index element={<Navigate replace to="contacts" />} />
               <Route path="contacts" element={<Contacts />} />
               <Route path="search" element={<Search />} />
               <Route path="users" element={<Users />} />
               <Route path="account" element={<Account />} />
-              <Route path="trash" element={<Trash />} />
+              <Route path="trashed" element={<Trashed />} />
               <Route path="labels" element={<Labels />} />
               <Route path="settings" element={<Settings />} />
             </Route>

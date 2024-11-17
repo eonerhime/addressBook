@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.react-international-phone-input-container .react-international-phone-input{
+.react-international-phone-input-container .react-international-phone-input {
   width: 100% !important;
 }
 

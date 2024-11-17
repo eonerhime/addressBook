@@ -3,13 +3,15 @@ import styled from "styled-components";
 import Table from "../../ui/Table";
 import Modal from "../../ui/Modal";
 import { PAGE_SIZE } from "../../utils/constants";
-import ConfirmDelete from "../../ui/ConfirmDelete";
-import { useDeleteContact } from "./useDeleteContact";
 import Menus from "../../ui/Menus";
-import { HiFolderOpen, HiPencil, HiTrash } from "react-icons/hi2";
+import { HiTrash } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import CreateContactForm from "./CreateContactForm";
+import { useRestoreContact } from "./useRestoreContact";
+import ConfirmRestore from "../../ui/ConfirmRestore";
+import { FaTrashRestore } from "react-icons/fa";
+import ConfirmDeleteTrashed from "../../ui/ConfirmDeleteTrashed";
+import { useDeleteTrashedContact } from "./useDeleteTrashedContact";
 
 const Img = styled.img`
   width: 4.8rem;
@@ -41,12 +43,12 @@ const Phone = styled.div`
   color: inherit;
 `;
 
-function ContactsRow({ contact, index }) {
+function TrashedRow({ contact, index }) {
   const [searchParams] = useSearchParams();
-  // const navigate = useNavigate();
-  // console.log(navigate);
+  const { isSuccess: isRestored, restoreContact } = useRestoreContact();
+  const { isSuccess: isDeleted, deleteTrashedContact } =
+    useDeleteTrashedContact();
 
-  const { isSuccess, deleteContact } = useDeleteContact();
   const [sn, setSn] = useState(1);
 
   const curPage = !searchParams.get("page")
@@ -68,10 +70,7 @@ function ContactsRow({ contact, index }) {
     <Table.Row>
       <div className="cursor-default">{sn}.</div>
 
-      <Name
-        onClick={() => console.log("clickED Name", contactId)}
-        className="justify-start"
-      >
+      <Name className="justify-start">
         <Img src={image} alt={firstName} className="hidden min-[300px]:block" />
         {firstName} {lastName}
       </Name>
@@ -86,26 +85,30 @@ function ContactsRow({ contact, index }) {
             <Menus.Toggle id={contactId} />
 
             <Menus.List id={contactId}>
-              <Menus.Button icon={<HiFolderOpen />}>View</Menus.Button>
-
-              <Modal.Open opens="contact-form">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+              <Modal.Open opens="restore">
+                <Menus.Button icon={<FaTrashRestore />}>Restore</Menus.Button>
               </Modal.Open>
 
               <Modal.Open opens="delete">
-                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                <Menus.Button icon={<HiTrash />}>
+                  Delete Permanently
+                </Menus.Button>
               </Modal.Open>
             </Menus.List>
 
-            <Modal.Window name="contact-form">
-              <CreateContactForm contactToUpdate={contact} />
+            <Modal.Window name="restore">
+              <ConfirmRestore
+                resourceName="contact"
+                disabled={isRestored}
+                onConfirm={() => restoreContact(contactId)}
+              />
             </Modal.Window>
 
             <Modal.Window name="delete">
-              <ConfirmDelete
+              <ConfirmDeleteTrashed
                 resourceName="contact"
-                disabled={isSuccess}
-                onConfirm={() => deleteContact(contactId)}
+                disabled={isDeleted}
+                onConfirm={() => deleteTrashedContact(contactId)}
               />
             </Modal.Window>
           </Menus.Menu>
@@ -115,4 +118,4 @@ function ContactsRow({ contact, index }) {
   );
 }
 
-export default ContactsRow;
+export default TrashedRow;

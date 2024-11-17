@@ -1,11 +1,12 @@
 import Table from "../../ui/Table";
-import Spinner from "../../ui/Spinner";
-import ContactsRow from "./ContactsRow";
-import { useContacts } from "./useContacts";
 import Menus from "../../ui/Menus";
-import useScreenSize from "../../hooks/useScreenSize";
-import { useEffect, useState } from "react";
+import Spinner from "../../ui/Spinner";
 import Pagination from "../../ui/Pagination";
+
+import { useEffect, useState } from "react";
+import useScreenSize from "../../hooks/useScreenSize";
+import { useTrashed } from "./useTrashed";
+import TrashedRow from "./TrashedRow";
 
 const displaySize = {
   large: "5% 30% 15% 30% 5%" /* >=680px */,
@@ -13,11 +14,11 @@ const displaySize = {
   small: "5% 75% 5%" /* <400px */,
 };
 
-function ContactsTable() {
+function TrashedContactsTable() {
   const deviceScreen = useScreenSize();
   const [screenSize, setScreenSize] = useState("");
-  const { isLoading, contacts, count } = useContacts();
   const [getScreenSize, setGetScreenSize] = useState("");
+  const { isLoading, trashedContacts, count } = useTrashed();
 
   useEffect(
     function () {
@@ -30,30 +31,13 @@ function ContactsTable() {
 
       if (screenSize.width >= 680) setGetScreenSize(displaySize.large);
     },
-    [deviceScreen, screenSize],
+    [deviceScreen, screenSize, count, trashedContacts?.length],
   );
 
   if (isLoading) return <Spinner />;
 
-  /* 
-    //   const filterValue = searchParama.get('sortBy') || 'lastName-asc';
-    
-    //   let filteredContacts;
-    
-    //   const modifier = filterValue === 'lastName-asc' ? 1 : -1;
-    
-    //   if (filterValue === 'id') filteredContacts = contacts?.sort((a,b) => (a.id < b.id) * modifier );
-    
-    //  if (filterValue === 'a-z')  filteredContacts = contacts?.sort((a,b) => (a.id < b.id) * modifier );
-    
-    //  if (filterValue === 'a-z') filteredContacts = contacts.sort((a,b) => {if(a.lastName < b.lastName) return -1});
-    
-    // if (filterValue === 'z-a') filteredContacts = contacts?.sort((a,b) => (a.id < b.id) * modifier );
-    
-    // if (filterValue === 'z-a') filteredContacts = contacts.sort((a,b) => (b.lastName < a.lastName)  * modifier);
- */
-
-  if (!contacts?.length) return <Table.Body data={contacts} />;
+  if (!trashedContacts?.length) return <Table.Body data={trashedContacts} />;
+  // debugger; // eslint-disable-line no-debugger
 
   return (
     <>
@@ -67,13 +51,13 @@ function ContactsTable() {
           </Table.Header>
 
           <Table.Body
-            data={contacts}
-            render={(contact, index) => (
-              <ContactsRow
-                contact={contact}
+            data={trashedContacts}
+            render={(trashedContacts, index) => (
+              <TrashedRow
+                contact={trashedContacts}
                 index={index}
                 count={count}
-                key={contact.id}
+                key={trashedContacts.id}
               />
             )}
           />
@@ -86,4 +70,4 @@ function ContactsTable() {
     </>
   );
 }
-export default ContactsTable;
+export default TrashedContactsTable;

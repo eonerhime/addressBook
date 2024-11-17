@@ -5,7 +5,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 
-
 const Main = styled.main`
   overflow: scroll;
 `;
@@ -19,12 +18,18 @@ const Container = styled.div`
 `;
 
 function AppLayout() {
-  
+  const darkModeStyle = {
+    backgroundColor: "var(--color-grey-0)",
+  };
+
   return (
-    <div className="h-dvh m-auto grid grid-cols-[15%_85%] grid-rows-[auto_1fr_auto] md:grid-cols-[17%_83%]">
+    <div
+      style={darkModeStyle}
+      className="m-auto grid h-dvh grid-cols-[15%_85%] grid-rows-[auto_1fr_auto] md:grid-cols-[17%_83%]"
+    >
       <Header />
       <Sidebar />
-      <Main className="pt-8 pb-[3.2rem] px-[1.4rem] md:pt-16 md:pb-[4rem] md:px-[4.8rem]">
+      <Main className="px-[1.4rem] pb-[3.2rem] pt-8 md:px-[4.8rem] md:pb-[4rem] md:pt-16">
         <Container>
           <Outlet />
         </Container>

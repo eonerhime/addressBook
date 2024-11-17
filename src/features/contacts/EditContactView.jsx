@@ -42,23 +42,26 @@ function EditContactView( {contactToUpdate = {}, onCloseModal }) {
         <img src={contactDetails.image} alt={contactDetails.image} className="max-w-36 h-auto rounded-[50%]"/>
       </FormRow>
 
-      <FormRow label="Title"  customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
-          <Label
-            type="text" 
-            id="title">{contactDetails.title}</Label>
-        </FormRow>
+      <FormRow label="Title" customStyle={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
+        <Label
+          type="text" 
+          id="title">{contactDetails.title}
+        </Label>
+      </FormRow>
 
       <FormRow label="First Name" customStyle={customStyle.at(0)} gridCols={numberColumns}>
-          <Label 
-            type="text" 
-            id="firstName"
-          >{contactDetails.firstName}</Label>
+        <Label 
+          type="text" 
+          id="firstName"
+          >{contactDetails.firstName}
+        </Label>
       </FormRow>
 
       <FormRow label="Middle Name" customStyle ={showMoreDetails ? customStyle.at(0) : customStyle.at(1)} gridCols={numberColumns}>
-          <Label 
-            type="text" 
-            id="middleName">{contactDetails.middleName}</Label>
+        <Label 
+          type="text" 
+          id="middleName">{contactDetails.middleName}
+        </Label>
       </FormRow>
 
         <FormRow label="Last Name" customStyle={customStyle.at(0)} gridCols={numberColumns}>
@@ -151,12 +154,12 @@ function EditContactView( {contactToUpdate = {}, onCloseModal }) {
         </div>
       </FormRow>
 
-      <FormRow style={{width: 'auto'}}>
-        <Button 
-          $variation="secondary" 
-          type="reset" onClick={()=>onCloseModal?.()}>
-          Cancel
-        </Button>
+        <FormRow style={{width: 'auto'}}>
+          <Button 
+            $variation="secondary" 
+            type="reset" onClick={()=>onCloseModal?.()}>
+            Cancel
+          </Button>
           
         <Modal>
           <Modal.Open opens="contact-form">

@@ -5,64 +5,67 @@ import { IoMdMenu } from "react-icons/io";
 
 import {} from "react-icons/io";
 import HeaderMenu from "./HeaderMenu";
-// import { useNavigate } from "react-router-dom";
 import UserAvatar from "../features/authentication/UserAvatar";
-// import styled from "styled-components";
 import Logout from "../features/authentication/Logout";
+import styled from "styled-components";
 
-// const StyledHeader = styled.nav`
-//   padding: 1.2rem 4.8rem;
-//   background-color: var(--color-grey-0);
-//   border-bottom: 1px solid var(--color-grey-100);
+const StyledHeader = styled.nav`
+  background-color: var(--color-grey-0);
+`;
 
-//   display: flex;
-//   gap: 2.4rem;
-//   align-items: center;
-//   justify-content: space-between;
-//   padding: 1.5rem 1rem;
-//   border-bottom-color: var(--tw-border-opacity);
+const StyledSpan = styled.span`
+  background-color: var(--color-grey-600);
+`;
 
-// `
+const StyledInput = styled.input`
+  background-color: var(--color-grey-600);
+`;
 
 function Header() {
   // const navigate = useNavigate();
-  
+
+  const darkModeStyle = {
+    fill: "var(--color-grey-100)",
+  };
+
   return (
-    <nav className="col-span-2 flex items-center justify-between px-6 h-24 py-4 border border-b-slate-500 md:col-span-full">
-      <div className="flex gap-10 items-center">
-        <span className="bg-gray-300 text-4xl rounded-full px-1 py-1">
-          <IoMdMenu className="cursor-pointer"/>
-        </span>
+    <StyledHeader className="col-span-2 flex h-24 items-center justify-between border border-b-slate-500 px-6 py-4 md:col-span-full">
+      <div className="flex items-center gap-10">
+        <StyledSpan className="rounded-full px-1 py-1 text-4xl">
+          <IoMdMenu style={darkModeStyle} />
+        </StyledSpan>
         {/* <span className="hidden min-[460px]:block text-4xl  px-1 py-1">
           <IoPerson />
         </span> */}
       </div>
       <div>
         <span className="relative">
-          <form >
-            <input
+          <form onSubmit={(e) => e.preventDefault()}>
+            <StyledInput
               placeholder="Search contact"
-              className="w-72 h-12 rounded-full bg-slate-100 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-slate-500 text-center focus:ring-opacity-50 placeholder:text-2xl sm:w-72 sm:focus:w-48 md:w-96 focus:md:w-96"
+              className="h-12 w-72 rounded-full px-4 py-2 pt-4 text-center text-2xl text-slate-800 transition-all duration-300 placeholder:text-2xl placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-slate-500 focus:ring-opacity-50 sm:w-72 sm:focus:w-48 md:w-96 focus:md:w-96"
             />
           </form>
-          <CiSearch className="absolute transform translate-x-1/2 translate-y-1/2 top-0 left-3/4 text-slate-400 text-2xl font-bold"></CiSearch>
+          <CiSearch className="absolute left-3/4 top-0 translate-x-1/2 translate-y-1/2 transform text-2xl font-bold text-slate-400"></CiSearch>
         </span>
       </div>
 
-      <div className="hidden min-[420px]:flex gap-10 items-center">
+      <div className="hidden items-center gap-10 min-[420px]:flex">
         {/* <span className="text-4xl px-1 py-1">
           <IoIosHelpCircleOutline />
         </span>
         <span className=" text-4xl  px-1 py-1 cursor-pointer">
           <IoMdSettings onClick={() => navigate('/settings')} />
         </span> */}
-        <span className="hidden min-[500px]:flex gap-8">
+        <span className="hidden gap-8 min-[500px]:flex">
           <UserAvatar />
           <HeaderMenu />
         </span>
       </div>
-        <span className="min-[500px]:hidden"><Logout /></span>
-    </nav>
+      <span className="min-[500px]:hidden">
+        <Logout />
+      </span>
+    </StyledHeader>
   );
 }
 

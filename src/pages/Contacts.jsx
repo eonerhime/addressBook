@@ -5,18 +5,24 @@ import ContactsTable from "../features/contacts/ContactsTable";
 import ContactTableOperations from "../features/contacts/ContactTableOperations";
 
 function Contacts() {
+  const darkModeStyle = {
+    backgroundColor: "var(--color-grey-0)",
+  };
 
-   return (
-    <>
-      <Row type='horizontal' className="flex max-[400px]:flex-col max-[400px]:!items-start text-2xl" >
+  return (
+    <div style={darkModeStyle}>
+      <Row
+        type="horizontal"
+        className="flex text-2xl max-[400px]:flex-col max-[400px]:!items-start"
+      >
         <Heading as="h1">Saved Contacts</Heading>
         <ContactTableOperations />
       </Row>
       <Row>
         <ContactsTable />
         <AddContact />
-     </Row>
-     </>
+      </Row>
+    </div>
   );
 }
 

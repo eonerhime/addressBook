@@ -3,7 +3,6 @@ import Button from "../../ui/Button";
 import CreateContactForm from "./CreateContactForm";
 
 function AddContact() {
-
   return (
     <div>
       <Modal>
@@ -11,11 +10,11 @@ function AddContact() {
           <Button>Add New Contact</Button>
         </Modal.Open>
         <Modal.Window name="contact-form">
-          <CreateContactForm  />
+          <CreateContactForm />
         </Modal.Window>
       </Modal>
     </div>
-  )
+  );
 }
 
-export default AddContact
+export default AddContact;

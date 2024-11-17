@@ -187,6 +187,14 @@ const GlobalStyles = createGlobalStyle`
     /* For dark mode */
     filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
   }
+
+  .react-international-phone-flag-emoji {
+    width: 4rem;
+  }
+
+  input[type='date'] {
+    width: 20rem;
+  }
 `;
 
 export default GlobalStyles;

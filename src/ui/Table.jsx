@@ -8,7 +8,7 @@ const StyledTable = styled.div`
   background-color: var(--color-grey-0);
   border-radius: 7px;
   overflow: hidden;
-  cursor: pointer;
+  cursor: default;
 `;
 
 const CommonRow = styled.div`
@@ -17,6 +17,7 @@ const CommonRow = styled.div`
   column-gap: 2.4rem;
   align-items: center;
   transition: none;
+  cursor: pointer;
 `;
 
 const StyledHeader = styled(CommonRow)`
@@ -34,7 +35,7 @@ const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
 
   &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
+    border-bottom: 2px solid var(--color-grey-200);
   }
 `;
 
