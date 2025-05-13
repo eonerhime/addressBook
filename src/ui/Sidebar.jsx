@@ -9,7 +9,7 @@ import CreateContactForm from "../features/contacts/CreateContactForm";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useContacts } from "../features/contacts/useContacts";
-import Uploader from "../data/Uploader";
+// import Uploader from "../data/Uploader";
 import { useTrashed } from "../features/trash/useTrashed";
 
 const StyledAside = styled.aside`
@@ -121,7 +121,7 @@ function Sidebar() {
         </Button>
       </div>
 
-      <Uploader />
+      {/* <Uploader /> */}
     </StyledAside>
   );
 }
